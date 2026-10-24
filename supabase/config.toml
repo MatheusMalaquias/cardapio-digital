@@ -1,0 +1,36 @@
+project_id = "cardapio-digital"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/**"]
+jwt_expiry = 3600
+enable_signup = false
+
+[auth.email]
+enable_signup = true  # habilita o provedor e-mail/senha; o cadastro público segue bloqueado por [auth].enable_signup
+enable_confirmations = false
+
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+
+[realtime]
+enabled = true
