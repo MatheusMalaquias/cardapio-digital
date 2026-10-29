@@ -3,6 +3,7 @@
 Web app mobile-first para cafeterias e restaurantes. O cliente abre o cardápio pelo celular a partir do link da mesa (tag NFC ou QR code), monta a comanda e envia o pedido. O garçom confirma, a cozinha prepara, o garçom entrega e o caixa fecha a conta. O dono gerencia cardápio, promoções e acompanha métricas.
 
 > **Status:** MVP funcional rodando localmente (fases 1 a 5 concluídas). Falta o acabamento da fase 6: PWA, testes automatizados e deploy. Veja o [roadmap](#roadmap).
+> **Publicar:** veja [`docs/deploy.md`](docs/deploy.md).
 > **Uso real:** ainda sem estabelecimentos em produção. Os números reais, quando existirem, ficam em [`docs/numeros.md`](docs/numeros.md).
 
 ## O problema

@@ -84,3 +84,13 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Contexto.** Fotos externas (picsum) falharam no ambiente de teste e quebram o seed offline.
 **Decisão.** SVGs por categoria em `public/placeholders/`.
 **Consequência.** Seed funciona sem internet. Fotos reais entram pelo upload do admin (Supabase Storage).
+
+## D17 · Códigos de mesa imprevisíveis por padrão
+**Contexto.** O seed usa `mesa1`, `mesa2`… Em produção, qualquer pessoa poderia digitar o link de outra mesa e pedir como se estivesse nela.
+**Decisão.** Ao criar uma mesa no admin sem informar o código, o sistema gera `m<numero>-<6 hex aleatórios>`. O QR já carrega o link completo, então o tamanho não atrapalha.
+**Consequência.** Reduz pedidos falsos por adivinhação do link. A confirmação do garçom segue como segunda barreira (D3).
+
+## D18 · Produção nasce sem usuários de teste
+**Contexto.** O `seed.sql` cria usuários com senha conhecida (`Teste@1234`), úteis no desenvolvimento, perigosos em produção.
+**Decisão.** `supabase db push` aplica só as migrations (o seed nunca é aplicado). O primeiro dono é criado no painel do Supabase e vinculado por `supabase/producao/bootstrap.sql`. Cadastro público de usuários fica desativado.
+**Consequência.** Mais um passo manual na implantação, documentado em [`docs/deploy.md`](deploy.md), em troca de não ter credenciais conhecidas no banco real.
