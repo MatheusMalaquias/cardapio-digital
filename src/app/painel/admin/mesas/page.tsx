@@ -46,7 +46,7 @@ export default async function Page() {
       </ul>
       <form action={criarMesa} className="grid gap-3 rounded-2xl bg-white p-4 sm:grid-cols-5 print:hidden">
         <Campo rotulo="Número"><input name="numero" type="number" min="1" required className={inp} /></Campo>
-        <Campo rotulo="Código do link (opcional)"><input name="codigo" placeholder="mesa11" pattern="[a-z0-9-]+" className={inp} /></Campo>
+        <Campo rotulo="Código do link (vazio = gerar um código aleatório)"><input name="codigo" placeholder="aleatório" pattern="[a-z0-9-]+" className={inp} /></Campo>
         <Campo rotulo="Garçom" className="sm:col-span-2"><select name="garcom_id" className={inp}><option value="">Sem garçom</option>{(garcons ?? []).map((g) => <option key={g.user_id} value={g.user_id}>{g.nome}</option>)}</select></Campo>
         <button className={`${btn} self-end`}>Criar mesa</button>
       </form>

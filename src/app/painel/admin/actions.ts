@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { randomUUID } from "crypto";
+import { randomBytes, randomUUID } from "crypto";
 import { requireMembro } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -91,7 +91,7 @@ export async function adicionarComplemento(f: FormData) {
 export async function criarMesa(f: FormData) {
   const { sb, m } = await ctx();
   const numero = n(f, "numero");
-  ok((await sb.from("mesas").insert({ estabelecimento_id: m.estabelecimentoId, numero, codigo: s(f, "codigo") || `mesa${numero}`, garcom_id: opt(f, "garcom_id") })).error);
+  ok((await sb.from("mesas").insert({ estabelecimento_id: m.estabelecimentoId, numero, codigo: s(f, "codigo") || `m${numero}-${randomBytes(3).toString("hex")}`, garcom_id: opt(f, "garcom_id") })).error);
   done();
 }
 export async function atribuirGarcom(f: FormData) {
