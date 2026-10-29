@@ -94,3 +94,8 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Contexto.** O `seed.sql` cria usuários com senha conhecida (`Teste@1234`), úteis no desenvolvimento, perigosos em produção.
 **Decisão.** `supabase db push` aplica só as migrations (o seed nunca é aplicado). O primeiro dono é criado no painel do Supabase e vinculado por `supabase/producao/bootstrap.sql`. Cadastro público de usuários fica desativado.
 **Consequência.** Mais um passo manual na implantação, documentado em [`docs/deploy.md`](deploy.md), em troca de não ter credenciais conhecidas no banco real.
+
+## D19 · Endpoint de saúde que diagnostica o deploy
+**Contexto.** No primeiro deploy na Vercel, as páginas deram erro 500 porque as variáveis do Supabase não estavam no build. Pelo lado de fora, a causa não era visível.
+**Decisão.** `GET /api/health` devolve apenas booleanos (cada variável chegou? o banco responde?) e os **nomes** de variáveis parecidas, nunca valores.
+**Consequência.** Diagnóstico de configuração em segundos e uma checagem pronta para monitoramento. O endpoint é público, mas não expõe nenhum segredo.
