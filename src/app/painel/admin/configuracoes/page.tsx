@@ -21,6 +21,10 @@ export default async function Page() {
       <Campo rotulo="Taxa de serviço (%)" className="sm:col-span-2"><input name="taxa" type="number" step="0.01" min="0" defaultValue={e.taxa_servico_pct} className={inp} /></Campo>
       <Campo rotulo="Limite de espera (min)" className="sm:col-span-2"><input name="limite" type="number" min="1" defaultValue={e.limite_espera_min} className={inp} /></Campo>
       <Campo rotulo="URL da política de privacidade" className="sm:col-span-2"><input name="politica" type="url" defaultValue={e.politica_privacidade_url ?? ""} className={inp} /></Campo>
+      <label className="flex items-start gap-3 text-sm sm:col-span-6">
+        <input type="checkbox" name="permitir_mesa" defaultChecked={e.permitir_escolher_mesa} className="mt-0.5 h-5 w-5" />
+        <span><strong>Permitir que o cliente escolha a mesa na página inicial.</strong> Desligado (recomendado): a mesa é definida só pelo link da tag ou do QR code, e ninguém consegue abrir o cardápio de outra mesa. Ligado: qualquer pessoa pode tocar em qualquer número de mesa.</span>
+      </label>
       <button className={`${btn} sm:col-span-2`}>Salvar configurações</button>
     </form>
   );
