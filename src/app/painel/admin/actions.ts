@@ -18,7 +18,8 @@ const done = () => revalidatePath("/painel/admin", "layout");
 const ok = (e: { message: string } | null) => { if (e) throw new Error(e.message); };
 
 async function enviarFoto(sb: Awaited<ReturnType<typeof createClient>>, estId: string, arq: FormDataEntryValue | null) {
-  if (!(arq instanceof File) || arq.size === 0) return null;
+  // sem `instanceof File`: o Node 18 não tem File global
+  if (typeof arq !== "object" || arq === null || typeof arq.arrayBuffer !== "function" || arq.size === 0) return null;
   if (!arq.type.startsWith("image/") || arq.size > 5 * 1024 * 1024) throw new Error("Envie uma imagem de até 5 MB.");
   const ext = (arq.name.split(".").pop() ?? "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
   const path = `${estId}/${randomUUID()}.${ext}`;
@@ -117,6 +118,7 @@ export async function salvarConfig(f: FormData) {
     nome: s(f, "nome"), cor_destaque: s(f, "cor"), texto_beneficio: opt(f, "beneficio"),
     desconto_cadastro_pct: n(f, "desconto"), fidelidade_meta: n(f, "meta"), fidelidade_premio: opt(f, "premio"),
     taxa_servico_pct: n(f, "taxa"), limite_espera_min: n(f, "limite"), politica_privacidade_url: opt(f, "politica"),
+    permitir_escolher_mesa: f.get("permitir_mesa") === "on",
   };
   const logo = await enviarFoto(sb, m.estabelecimentoId, f.get("logo"));
   if (logo) row.logo_url = logo;
