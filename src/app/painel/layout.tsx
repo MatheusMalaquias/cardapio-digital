@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { requireMembro } from "@/lib/auth";
 import { ACESSO, NOME_PAPEL } from "@/lib/papeis";
-import { sair } from "@/app/login/actions";
-import { LogOut } from "lucide-react";
+import { sair } from "@/app/gestao/actions";
+import { KeyRound, LogOut } from "lucide-react";
 
 const ROTULOS: Record<string, string> = {
   "/painel/garcom": "Garçom", "/painel/cozinha": "Cozinha", "/painel/caixa": "Caixa",
@@ -20,11 +20,16 @@ export default async function PainelLayout({ children }: { children: React.React
             <p className="font-display text-lg font-semibold leading-tight">{membro.estabelecimentoNome}</p>
             <p className="text-xs text-stone-300">{membro.nome} · {NOME_PAPEL[membro.papel]}</p>
           </div>
+          <div className="flex items-center">
+          <Link href="/redefinir-senha" aria-label="Alterar senha" className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-white/10">
+            <KeyRound size={20} aria-hidden />
+          </Link>
           <form action={sair}>
             <button type="submit" aria-label="Sair" className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-white/10">
               <LogOut size={20} aria-hidden />
             </button>
           </form>
+          </div>
         </div>
         {links.length > 1 && (
           <nav aria-label="Áreas do painel" className="flex gap-2 overflow-x-auto px-4 pb-3">

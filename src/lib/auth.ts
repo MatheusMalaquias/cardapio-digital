@@ -14,13 +14,13 @@ export type Membro = {
 export async function requireMembro(): Promise<Membro> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/gestao");
   const { data } = await supabase
     .from("equipe")
     .select("nome, papel, estabelecimento_id, estabelecimentos(nome)")
     .eq("user_id", user.id)
     .maybeSingle();
-  if (!data) redirect("/login?erro=sem_acesso");
+  if (!data) redirect("/gestao?erro=sem_acesso");
   const est = data.estabelecimentos as unknown as { nome: string } | null;
   return {
     userId: user.id,

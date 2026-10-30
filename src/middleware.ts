@@ -26,7 +26,7 @@ export async function middleware(request: NextRequest) {
 
   if (!user) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = "/gestao";
     url.search = `?next=${encodeURIComponent(path)}`;
     return NextResponse.redirect(url);
   }
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
 
   if (!papel) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = "/gestao";
     url.search = "?erro=sem_acesso";
     return NextResponse.redirect(url);
   }

@@ -11,13 +11,13 @@ export async function entrar(formData: FormData) {
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha });
-  if (error || !data.user) redirect("/login?erro=credenciais");
+  if (error || !data.user) redirect("/gestao?erro=credenciais");
 
   const { data: membro } = await supabase
     .from("equipe").select("papel").eq("user_id", data.user.id).maybeSingle();
   if (!membro) {
     await supabase.auth.signOut();
-    redirect("/login?erro=sem_acesso");
+    redirect("/gestao?erro=sem_acesso");
   }
   const destino = next.startsWith("/painel") ? next : HOME_POR_PAPEL[membro.papel as Papel];
   redirect(destino);
@@ -26,5 +26,5 @@ export async function entrar(formData: FormData) {
 export async function sair() {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  redirect("/login");
+  redirect("/gestao");
 }
