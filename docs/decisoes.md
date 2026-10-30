@@ -119,3 +119,8 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Contexto.** A D20 deixava qualquer pessoa ver e escolher qualquer mesa, o que contradiz a ideia central do produto: o link da tag/QR define a mesa, e o cliente não deve mexer nas coisas de outra mesa.
 **Decisão.** Nova configuração `permitir_escolher_mesa`, **desligada por padrão**. Desligada, `listar_mesas` não devolve nenhuma mesa (nem os códigos dos links) e a página do café só pede para aproximar o celular da tag ou ler o QR. Ligada pelo dono em *Configurações*, mostra o seletor de mesas (útil para cafés sem tags).
 **Consequência.** Os códigos aleatórios (D17) voltam a ser a barreira real entre mesas. Quem quiser a conveniência do seletor assume conscientemente o risco, descrito na própria opção.
+
+## D24 · Demonstração estática no GitHub Pages, publicada por GitHub Actions
+**Contexto.** O app real (login, pedidos, tempo real, banco) precisa de servidor e roda na Vercel; o GitHub Pages só serve arquivos estáticos. Ainda assim, o portfólio precisa de um link que qualquer pessoa abra e experimente.
+**Decisão.** A pasta `site/` tem uma vitrine (`index.html`) e uma demonstração interativa (`demo.html`) em HTML, CSS e JavaScript puros, com dados de exemplo espelhados do seed. O garçom e a cozinha são simulados por tempo. Um workflow do GitHub Actions publica só `site/` no Pages a cada mudança nela.
+**Consequência.** Link público sem custo e sem backend. Em contrapartida, a demo é uma reimplementação (não o mesmo código React) e pode divergir do app real: por isso ela se declara "demonstração" e a vitrine aponta o app e o código reais. Nada na pasta `site/` carrega dado de cliente ou chave.
