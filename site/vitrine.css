@@ -42,3 +42,4 @@ figcaption{padding:14px 16px;font-size:.88rem;color:var(--mudo)}figcaption b{dis
 .aviso{margin-top:24px;padding:16px 20px;border:1px dashed #4a403a;border-radius:16px;color:var(--mudo);font-size:.92rem}
 footer{padding:40px 20px;text-align:center;color:var(--mudo);font-size:.85rem;border-top:1px solid var(--linha)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.intro{max-width:44rem;color:var(--mudo);font-size:1.05rem;margin:-8px 0 28px}

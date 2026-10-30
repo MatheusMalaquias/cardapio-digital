@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="vitrine.css?v=1">
+<link rel="stylesheet" href="vitrine.css?v=2">
 </head>
 <body>
 <header class="hero">
@@ -21,13 +21,26 @@
     <p class="sub">O cliente aproxima o celular da tag da mesa, escolhe e pede. O garçom confirma, a cozinha prepara e o caixa fecha a conta, tudo em tempo real.</p>
     <div class="acoes">
       <a class="btn btn-prim" href="demo.html">Abrir a demonstração</a>
-      <a class="btn btn-borda" href="https://github.com/MatheusMalaquias/cardapio-digital">Ver o código</a>
+      <a class="btn btn-borda" href="#sobre">Por que esta página?</a>
     </div>
   </div>
 </header>
 
 <main>
-  <section class="secao">
+  <section class="secao" id="sobre">
+    <div class="wrap">
+      <p class="eyebrow">Sobre esta página</p>
+      <h2>Por que ela existe</h2>
+      <p class="intro">Montei esta página para mostrar, na prática, como um cardápio digital pode funcionar em uma cafeteria ou restaurante. Em vez de só descrever a ideia, você pode abrir a demonstração e fazer um pedido de teste, como se estivesse sentado a uma mesa.</p>
+      <div class="grid3">
+        <article class="cartao"><h3>Para quem é</h3><p>Para donos e gerentes de cafeterias e restaurantes que querem ver como seria a experiência do cliente e o trabalho da equipe.</p></article>
+        <article class="cartao"><h3>O que você pode fazer aqui</h3><p>Abrir a demonstração, escolher produtos, combinar itens, enviar um pedido e ver o status mudar. Depois, ver as telas do garçom, da cozinha, do caixa e do dono.</p></article>
+        <article class="cartao"><h3>O que é real e o que é simulado</h3><p>O café, o cardápio e os preços são fictícios, e na demonstração o garçom e a cozinha são simulados. O sistema completo existe como um MVP em fase de testes, ainda sem estabelecimentos usando.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao alt">
     <div class="wrap">
       <p class="eyebrow">O problema</p>
       <h2>Esperar para pedir, para pagar e para saber se o pedido saiu</h2>
@@ -39,7 +52,7 @@
     </div>
   </section>
 
-  <section class="secao alt">
+  <section class="secao">
     <div class="wrap">
       <p class="eyebrow">Como funciona</p>
       <h2>Do celular ao caixa</h2>
@@ -54,7 +67,7 @@
     </div>
   </section>
 
-  <section class="secao">
+  <section class="secao alt">
     <div class="wrap">
       <p class="eyebrow">Telas do cliente</p>
       <h2>Mobile-first, com movimento ligado ao scroll</h2>
@@ -66,7 +79,7 @@
     </div>
   </section>
 
-  <section class="secao alt">
+  <section class="secao">
     <div class="wrap">
       <p class="eyebrow">Telas da equipe e do dono</p>
       <h2>Garçom, cozinha, caixa e administração</h2>
@@ -80,7 +93,7 @@
     </div>
   </section>
 
-  <section class="secao">
+  <section class="secao alt">
     <div class="wrap">
       <p class="eyebrow">Decisões de engenharia</p>
       <h2>O que sustenta o produto</h2>
@@ -94,11 +107,10 @@
       </ul>
       <p class="eyebrow" style="margin-top:36px">Tecnologias</p>
       <div class="chips"><span>Next.js (App Router)</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>PostgreSQL + RLS</span><span>Realtime</span><span>Storage</span><span>Vercel</span><span>GitHub Actions</span></div>
-      <p class="aviso"><b>Transparência:</b> é um MVP em fase de testes, ainda sem estabelecimentos em produção. Os dados das telas e da demonstração são de exemplo. A demonstração roda só no navegador, sem servidor, e simula o garçom e a cozinha por tempo.</p>
     </div>
   </section>
 </main>
 
-<footer>Projeto de portfólio de Matheus O. Malaquias · <a href="demo.html">Demonstração</a> · <a href="https://github.com/MatheusMalaquias/cardapio-digital">Código</a></footer>
+<footer>Projeto de portfólio de Matheus O. Malaquias · <a href="demo.html">Demonstração</a></footer>
 </body>
 </html>
