@@ -53,7 +53,7 @@
   });
   $("#btnGarcom").addEventListener("click", () => {
     $("#btnGarcom").disabled = true; $("#txtGarcom").textContent = "Chamado";
-    toast("Garçom chamado (simulado). Na versão real ele recebe o aviso na hora.");
+    toast("Garçom chamado (simulado). No café, ele recebe o aviso na hora.");
     setTimeout(() => { $("#btnGarcom").disabled = false; $("#txtGarcom").textContent = "Chamar garçom"; }, 6000);
   });
   $("#btnVer").addEventListener("click", () => $("#menu").scrollIntoView({ behavior: reduzir ? "auto" : "smooth" }));
@@ -189,7 +189,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><div class="qtd"><button type="button" data-q="${k}" data-d="-1" aria-label="Diminuir ${esc(i.nome)}">${ic.menos}</button><span>${i.qtd}</span><button type="button" data-q="${k}" data-d="1" aria-label="Aumentar ${esc(i.nome)}">${ic.mais}</button></div><button type="button" class="x" style="background:none" data-rm="${k}" aria-label="Remover ${esc(i.nome)}">${ic.lixo}</button></div></div>`).join("") : '<p class="muted" style="font-size:.9rem">Nada na comanda. Escolha itens no cardápio.</p>'}</div>
       <div class="bloco"><h3 class="disp">Já pedido nesta mesa</h3>${pedidos.length ? pedidos.map((p) => `<div class="linha-item"><span class="status s-${p.status}">${ROT[p.status]}</span><ul style="margin-top:8px;font-size:.88rem">${p.itens.map((i) => `<li style="display:flex;justify-content:space-between;gap:8px"><span>${i.qtd}x ${esc(i.nome)}${i.tam ? ` (${i.tam})` : ""}</span><span>${brl(i.unit * i.qtd)}</span></li>`).join("")}</ul></div>`).join("") : '<p class="muted" style="font-size:.9rem">Nenhum pedido enviado ainda.</p>'}</div>
       <p class="total"><span>Total da mesa</span><span>${brl(totalCart() + totalPedidos())}</span></p><p class="muted" style="font-size:.78rem">O pagamento é feito no caixa, ao final.</p>
-      <p class="nota">Demonstração: o garçom, a cozinha e o caixa são simulados por tempo. Na versão real, cada um vê o pedido na própria tela, em tempo real.</p>`;
+      <p class="nota">Demonstração: o garçom e a cozinha são simulados e nada é enviado de verdade. No café, o pedido chega à equipe na hora.</p>`;
     c.scrollTop = pos;
     $("#env", comandaEl).hidden = cart.length === 0; $("#env", comandaEl).textContent = `Enviar pedido ao garçom · ${brl(totalCart())}`;
     const conta = $("#conta", comandaEl); conta.disabled = contaPedida || pedidos.length === 0;

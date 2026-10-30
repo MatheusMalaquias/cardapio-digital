@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cardápio Digital com comanda por mesa — Projeto</title>
-<meta name="description" content="Cardápio digital para cafeterias e restaurantes: o cliente pede pelo celular, o garçom confirma, a cozinha prepara e o caixa fecha a conta. Demonstração interativa e telas do projeto.">
-<meta property="og:title" content="Cardápio Digital com comanda por mesa">
-<meta property="og:description" content="Do pedido no celular ao fechamento no caixa. Veja a demonstração interativa.">
+<title>Cardápio digital — peça direto da sua mesa</title>
+<meta name="description" content="Veja como é pedir em um café pelo celular, sem fila: escolha, acompanhe o preparo e pague no caixa. Experimente a demonstração.">
+<meta property="og:title" content="Cardápio digital — peça direto da sua mesa">
+<meta property="og:description" content="Experimente pedir pelo celular, sem fila. Demonstração com café fictício.">
 <meta name="theme-color" content="#0C0A09">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="vitrine.css?v=2">
+<link rel="stylesheet" href="vitrine.css?v=3">
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
-    <p class="selo"><span class="ponto" aria-hidden="true"></span> Projeto de portfólio · MVP funcional</p>
-    <h1 class="grad">Cardápio digital com comanda por mesa</h1>
-    <p class="sub">O cliente aproxima o celular da tag da mesa, escolhe e pede. O garçom confirma, a cozinha prepara e o caixa fecha a conta, tudo em tempo real.</p>
+    <p class="selo"><span class="ponto" aria-hidden="true"></span> Demonstração · café fictício</p>
+    <h1 class="grad">Peça direto da sua mesa, sem fila</h1>
+    <p class="sub">Escolha no celular, acompanhe o preparo e pague no caixa. Experimente aqui como é, sem pedir de verdade.</p>
     <div class="acoes">
-      <a class="btn btn-prim" href="demo.html">Abrir a demonstração</a>
+      <a class="btn btn-prim" href="demo.html">Experimentar o cardápio</a>
       <a class="btn btn-borda" href="#sobre">Por que esta página?</a>
     </div>
   </div>
@@ -31,86 +31,59 @@
     <div class="wrap">
       <p class="eyebrow">Sobre esta página</p>
       <h2>Por que ela existe</h2>
-      <p class="intro">Montei esta página para mostrar, na prática, como um cardápio digital pode funcionar em uma cafeteria ou restaurante. Em vez de só descrever a ideia, você pode abrir a demonstração e fazer um pedido de teste, como se estivesse sentado a uma mesa.</p>
+      <p class="intro">Esta é uma página de demonstração. Aqui você experimenta, sem compromisso, como é pedir em um café usando só o celular, do jeito que seria sentado à mesa. Assim você conhece o cardápio digital antes de usá-lo de verdade.</p>
       <div class="grid3">
-        <article class="cartao"><h3>Para quem é</h3><p>Para donos e gerentes de cafeterias e restaurantes que querem ver como seria a experiência do cliente e o trabalho da equipe.</p></article>
-        <article class="cartao"><h3>O que você pode fazer aqui</h3><p>Abrir a demonstração, escolher produtos, combinar itens, enviar um pedido e ver o status mudar. Depois, ver as telas do garçom, da cozinha, do caixa e do dono.</p></article>
-        <article class="cartao"><h3>O que é real e o que é simulado</h3><p>O café, o cardápio e os preços são fictícios, e na demonstração o garçom e a cozinha são simulados. O sistema completo existe como um MVP em fase de testes, ainda sem estabelecimentos usando.</p></article>
+        <article class="cartao"><h3>O que é</h3><p>Um cardápio digital com fotos, ingredientes e opções, e uma comanda da mesa onde você acompanha o que pediu.</p></article>
+        <article class="cartao"><h3>O que você pode fazer</h3><p>Percorrer o cardápio, escolher e personalizar itens, combinar com outros, enviar um pedido e ver o andamento dele.</p></article>
+        <article class="cartao"><h3>O que é de mentira</h3><p>O café, os produtos e os preços são fictícios, e nenhum pedido é enviado de verdade. O andamento do pedido é só uma simulação.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="secao alt">
+  <section class="secao alt" id="como">
     <div class="wrap">
-      <p class="eyebrow">O problema</p>
-      <h2>Esperar para pedir, para pagar e para saber se o pedido saiu</h2>
-      <div class="grid3">
-        <article class="cartao"><h3>Fila para pedir</h3><p>O cliente espera o garçom passar só para fazer o pedido, e o salão perde tempo.</p></article>
-        <article class="cartao"><h3>Pedido que se perde</h3><p>Anotação em papel e recado verbal para a cozinha geram erro e retrabalho.</p></article>
-        <article class="cartao"><h3>Conta lenta</h3><p>Fechar a conta, dividir e cobrar do jeito certo demora e irrita quem quer ir embora.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="secao">
-    <div class="wrap">
-      <p class="eyebrow">Como funciona</p>
-      <h2>Do celular ao caixa</h2>
+      <p class="eyebrow">Como funciona para você</p>
+      <h2>Da mesa ao caixa, em cinco passos</h2>
       <ol class="passos">
-        <li><b>Cliente pede</b>Abre o link da mesa, escolhe, combina e envia. Sem login e sem baixar app.</li>
-        <li><b>Garçom confirma</b>Recebe em tempo real. Isso barra pedido falso de quem fotografou o QR fora do café.</li>
-        <li><b>Cozinha prepara</b>Quadro em três colunas: confirmado, em preparo e pronto.</li>
-        <li><b>Garçom entrega</b>É avisado quando fica pronto e marca como entregue.</li>
-        <li><b>Cliente acompanha</b>Vê o status de cada pedido ao vivo e pode chamar o garçom ou pedir a conta.</li>
-        <li><b>Caixa fecha</b>Desconto, taxa de serviço, divisão da conta e forma de pagamento. A mesa é liberada.</li>
+        <li><b>Aproxime o celular</b>Encoste o celular na tag da sua mesa ou leia o QR code. O cardápio da sua mesa abre na hora, sem baixar aplicativo e sem criar conta.</li>
+        <li><b>Escolha</b>Veja fotos grandes, ingredientes e como é feito. Personalize (açúcar, gelo, tamanho) e combine com qualquer outro item.</li>
+        <li><b>Envie o pedido</b>O pedido vai para o garçom, que confirma e manda para a cozinha.</li>
+        <li><b>Acompanhe</b>Veja o andamento ao vivo: confirmado, em preparo, pronto e entregue. Precisando, é só chamar o garçom.</li>
+        <li><b>Pague no caixa</b>Peça a conta pelo celular quando quiser. O pagamento é feito no caixa, no final.</li>
       </ol>
     </div>
   </section>
 
-  <section class="secao alt">
-    <div class="wrap">
-      <p class="eyebrow">Telas do cliente</p>
-      <h2>Mobile-first, com movimento ligado ao scroll</h2>
-      <div class="telas">
-        <figure><img src="prints/01-cliente-abertura.jpg" alt="Tela de abertura do cardápio com texto digitado" loading="lazy"><figcaption><b>Abertura</b>Texto digitado e elementos que entram conforme a rolagem.</figcaption></figure>
-        <figure><img src="prints/02-cliente-vitrine.jpg" alt="Produto em tela cheia com preço promocional" loading="lazy"><figcaption><b>Uma foto por tela</b>Nome, preço e promoção. As características só aparecem ao escolher.</figcaption></figure>
-        <figure><img src="prints/03-cliente-detalhe-produto.jpg" alt="Detalhe do produto com ingredientes, modo de preparo e opções" loading="lazy"><figcaption><b>Detalhe do produto</b>Ingredientes, modo de preparo, opções (açúcar, gelo…) e combinação com qualquer item.</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
   <section class="secao">
     <div class="wrap">
-      <p class="eyebrow">Telas da equipe e do dono</p>
-      <h2>Garçom, cozinha, caixa e administração</h2>
-      <div class="telas larga">
-        <figure><img src="prints/04-painel-garcom.jpg" alt="Painel do garçom com pedido para confirmar" loading="lazy"><figcaption><b>Garçom</b>Fila por urgência, com alerta de espera. O pedido do print é de teste, de um dia atrás.</figcaption></figure>
-        <figure><img src="prints/05-painel-cozinha.jpg" alt="Quadro da cozinha em três colunas" loading="lazy"><figcaption><b>Cozinha</b>Confirmados, em preparo e prontos, com as opções de cada item.</figcaption></figure>
-        <figure><img src="prints/06-painel-caixa.jpg" alt="Caixa com itens, desconto, taxa e pagamento" loading="lazy"><figcaption><b>Caixa</b>Desconto do cliente cadastrado, taxa de serviço, divisão e pagamento.</figcaption></figure>
-        <figure><img src="prints/07-painel-metricas-dados-de-exemplo.jpg" alt="Painel de métricas do dono" loading="lazy"><figcaption><b>Métricas</b>Vendas, tempos e desempenho. <i>Dados fictícios de exemplo.</i></figcaption></figure>
-        <figure><img src="prints/08-admin-mesas-qr.jpg" alt="Administração de mesas com QR code" loading="lazy"><figcaption><b>Mesas e QR</b>Um link aleatório por mesa, pronto para gravar na tag ou imprimir.</figcaption></figure>
+      <p class="eyebrow">O que você vê no celular</p>
+      <h2>Simples de usar</h2>
+      <div class="telas">
+        <figure><img src="prints/01-cliente-abertura.jpg" alt="Tela de abertura do cardápio" loading="lazy"><figcaption><b>Abertura</b>Você chega direto no cardápio da sua mesa.</figcaption></figure>
+        <figure><img src="prints/02-cliente-vitrine.jpg" alt="Produto em tela cheia com preço promocional" loading="lazy"><figcaption><b>Uma foto por tela</b>Nome, preço e promoções do dia, bem à vista.</figcaption></figure>
+        <figure><img src="prints/03-cliente-detalhe-produto.jpg" alt="Detalhe do produto com ingredientes, modo de preparo e opções" loading="lazy"><figcaption><b>Detalhes do produto</b>Ingredientes, modo de preparo, opções e combinação com outros itens.</figcaption></figure>
       </div>
+      <div class="acoes" style="margin-top:36px"><a class="btn btn-prim" href="demo.html">Experimentar agora</a></div>
     </div>
   </section>
 
   <section class="secao alt">
-    <div class="wrap">
-      <p class="eyebrow">Decisões de engenharia</p>
-      <h2>O que sustenta o produto</h2>
-      <ul class="lista">
-        <li><b>Vários estabelecimentos no mesmo banco</b>, isolados por Row Level Security em todas as tabelas.</li>
-        <li><b>Cliente anônimo não escreve nas tabelas.</b> Pedidos passam por funções que validam tudo e <b>recalculam o preço no servidor</b>.</li>
-        <li><b>A mesa é definida pelo link da tag</b>, com código aleatório; confirmar o pedido é papel do garçom.</li>
-        <li><b>Limite de pedidos por celular</b> e histórico do preço de cada item vendido.</li>
-        <li><b>Recuperação de senha</b> por e-mail, papéis por rota e nenhum segredo no front-end.</li>
-        <li>Cada escolha importante está registrada no <b>log de decisões</b> do repositório.</li>
-      </ul>
-      <p class="eyebrow" style="margin-top:36px">Tecnologias</p>
-      <div class="chips"><span>Next.js (App Router)</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>PostgreSQL + RLS</span><span>Realtime</span><span>Storage</span><span>Vercel</span><span>GitHub Actions</span></div>
+    <div class="wrap estreito">
+      <p class="eyebrow">Dúvidas comuns</p>
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        <details><summary>Preciso baixar um aplicativo?</summary><p>Não. Tudo abre direto no navegador do celular, a partir da tag ou do QR code da sua mesa.</p></details>
+        <details><summary>Preciso criar uma conta?</summary><p>Não para pedir. Na versão completa, o cadastro é opcional e serve para receber promoções, ganhar desconto e juntar selos no cartão fidelidade.</p></details>
+        <details><summary>Como eu pago?</summary><p>No caixa, no final. Você pede a conta pelo celular, e o garçom ou o caixa cuidam do resto. Não há pagamento pelo aplicativo.</p></details>
+        <details><summary>Posso chamar o garçom?</summary><p>Sim, a qualquer momento, pelo botão “Chamar garçom”. Ele recebe o aviso na hora.</p></details>
+        <details><summary>E se eu tiver alergia ou restrição?</summary><p>Há filtros para “sem glúten”, “sem lactose” e “vegano”, e cada produto mostra os ingredientes.</p></details>
+        <details><summary>Podemos pedir em grupo?</summary><p>Podem. Todos na mesa usam a mesma comanda, cada um no próprio celular, e a conta é da mesa.</p></details>
+        <details><summary>Esta demonstração envia um pedido de verdade?</summary><p>Não. É só um teste: o café é fictício e nada é enviado a ninguém.</p></details>
+      </div>
     </div>
   </section>
 </main>
 
-<footer>Projeto de portfólio de Matheus O. Malaquias · <a href="demo.html">Demonstração</a></footer>
+<footer>Página de demonstração · café, produtos e preços fictícios · <a href="demo.html">Experimentar o cardápio</a></footer>
 </body>
 </html>

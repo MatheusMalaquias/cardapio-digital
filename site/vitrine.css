@@ -43,3 +43,11 @@ figcaption{padding:14px 16px;font-size:.88rem;color:var(--mudo)}figcaption b{dis
 footer{padding:40px 20px;text-align:center;color:var(--mudo);font-size:.85rem;border-top:1px solid var(--linha)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .intro{max-width:44rem;color:var(--mudo);font-size:1.05rem;margin:-8px 0 28px}
+.faq{display:grid;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:0 20px}
+.faq summary{cursor:pointer;min-height:56px;display:flex;align-items:center;font-weight:600;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;font-size:1.4rem;color:var(--a1);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 18px;color:var(--mudo);font-size:.95rem}
+.estreito{max-width:720px}
