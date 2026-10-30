@@ -15,7 +15,7 @@
   const raiz = document.documentElement;
   raiz.style.setProperty("--accent", D.cafe.cor);
 
-  let cart = [], pedidos = [], filtros = new Set(), contaPedida = false, seq = 0, comandaEl = null;
+  let cart = [], pedidos = [], filtros = new Set(), contaPedida = false, seq = 0, comandaEl = null, perfil = null;
   const overlays = [];
 
   /* ===== utilidades de interface ===== */
@@ -69,15 +69,71 @@
         <span class="linha-preco"><span class="preco">${promo ? `<s>${brl(p.preco)}</s>` : ""}<b class="grad-accent">${brl(preco(p))}</b></span><span class="btn-esc">Escolher +</span></span></span>
     </button></li>`;
   }
+  const SELOS = 10;
+  function cadastroCard(visivel) {
+    const cls = visivel ? "rv in" : "rv";
+    if (perfil) {
+      return `<aside class="${cls} cad-card" id="cadCard" aria-label="Seu cadastro"><h3 class="cad-t disp">Olá, ${esc(perfil.nome)}!</h3>
+        <p class="cad-d">${perfil.consent ? `Você vai receber promoções do ${esc(D.cafe.nome)} pelo WhatsApp.` : "Cadastro feito. Você não vai receber promoções pelo WhatsApp."} Seu cartão fidelidade: ${perfil.selos} de ${SELOS} selos.</p>
+        <button type="button" class="cad-b" data-perfil>Ver meu cartão</button></aside>`;
+    }
+    return `<aside class="${cls} cad-card" id="cadCard" aria-label="Cadastro opcional"><p class="cad-o">Opcional</p><h3 class="cad-t disp">Receba promoções feitas para você</h3>
+      <p class="cad-d">Cadastre-se e ganhe 10% de desconto nesta visita, junte selos no cartão fidelidade (o 10º café é grátis) e receba ofertas pelo WhatsApp, só se você quiser.</p>
+      <button type="button" class="cad-b brilho" data-perfil>Quero me cadastrar</button></aside>`;
+  }
   function renderMenu() {
-    $("#menu").innerHTML = D.categorias.map((c, i) => {
+    const corpo = D.categorias.map((c, i) => {
       const lista = D.produtos.filter((p) => p.cat === c.id && [...filtros].every((f) => p.alerg.includes(f)));
       if (!lista.length) return "";
       return `<section class="secao-cat" id="cat-${c.id}" data-cat="${c.id}"><div class="rv cab"><p class="num">${String(i + 1).padStart(2, "0")}</p><h2 class="grad-text disp">${c.nome}</h2><div class="linha"></div></div><ul>${lista.map(cena).join("")}</ul></section>`;
     }).join("") || '<p class="vazio">Nenhum item com esses filtros.</p>';
+    $("#menu").innerHTML = cadastroCard() + corpo;
     $$(".rv").forEach((n) => io.observe(n));
   }
-  $("#menu").addEventListener("click", (e) => { const b = e.target.closest("[data-abrir]"); if (b) abrirProduto(b.dataset.abrir); });
+  function atualizarCard() { const c = $("#cadCard"); if (c) c.outerHTML = cadastroCard(true); }
+
+  /* ===== cadastro opcional (simulado: nada é guardado ou enviado) ===== */
+  function zapValido(v) {
+    let d = v.replace(/\D/g, ""); if (d.length >= 12 && d.startsWith("55")) d = d.slice(2);
+    return /^[1-9][1-9](9[0-9]{8}|[2-8][0-9]{7})$/.test(d);
+  }
+  function abrirPerfil() {
+    const el = document.createElement("div"); el.className = "fundo-escuro";
+    const cartao = () => `<div class="bloco"><p class="nota" style="margin-top:0">${perfil.consent ? `Pronto! Você vai receber promoções do ${esc(D.cafe.nome)} pelo WhatsApp. Para sair, é só responder SAIR.` : "Cadastro feito. Como você não marcou o aceite, não vai receber promoções pelo WhatsApp."}</p>
+      <p class="bloco" style="margin-top:16px"><b>Benefício desta visita:</b> 10% de desconto, aplicado no caixa.</p>
+      <div class="linha-item" style="margin-top:16px"><div class="topo"><span>Cartão fidelidade</span><span>${perfil.selos} de ${SELOS}</span></div>
+        <div class="fid" role="img" aria-label="${perfil.selos} de ${SELOS} selos">${Array.from({ length: SELOS }, (_, i) => `<i class="${i < perfil.selos ? "on" : ""}"></i>`).join("")}</div>
+        <small>O ${SELOS}º café é grátis.</small></div></div>`;
+    const form = () => `<form id="fPerfil" novalidate>
+      <p class="nota" style="margin-top:0"><b>Benefício:</b> 10% de desconto nesta visita e cartão fidelidade com selos.</p>
+      <div class="campo-f"><label for="pNome">Nome</label><input class="f" id="pNome" autocomplete="name" required></div>
+      <div class="campo-f"><label for="pZap">WhatsApp</label><input class="f" id="pZap" inputmode="tel" placeholder="(11) 98888-7777" autocomplete="tel" required></div>
+      <div class="campo-f"><label for="pAniv">Aniversário (opcional)</label><input class="f" id="pAniv" type="date"></div>
+      <label class="lgpd"><input type="checkbox" id="pOk"><span>Aceito receber promoções de ${esc(D.cafe.nome)} pelo WhatsApp. Posso sair quando quiser respondendo SAIR.</span></label>
+      <p id="pErro" class="erro-f" role="alert" hidden></p>
+      <p class="muted" style="font-size:.78rem;margin-top:8px">Demonstração: nenhum dado é guardado ou enviado.</p></form>`;
+    function desenhar() {
+      el.innerHTML = `<div class="folha" role="dialog" aria-modal="true" aria-label="${perfil ? "Meu cartão" : "Criar perfil"}"><header><h2 class="disp">${perfil ? "Meu cartão" : "Criar perfil"}</h2><button class="x" type="button" data-fechar aria-label="Fechar">${ic.x}</button></header>
+        <div class="corpo">${perfil ? cartao() : form()}</div>
+        <div class="rodape">${perfil ? '<button class="btn-prim" type="button" data-fechar>Fechar</button>' : '<button class="btn-prim" type="submit" form="fPerfil">Salvar perfil</button>'}</div></div>`;
+    }
+    desenhar(); document.body.appendChild(el); overlays.push(el); travar();
+    el.addEventListener("click", (e) => { if (e.target === el || e.target.closest("[data-fechar]")) fecharTopo(); });
+    el.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nome = $("#pNome", el).value.trim(), erro = $("#pErro", el);
+      const falha = nome.length < 2 ? "Informe seu nome." : !zapValido($("#pZap", el).value) ? "WhatsApp inválido. Use DDD + número, ex.: (11) 98888-7777." : "";
+      if (falha) { erro.textContent = falha; erro.hidden = false; return; }
+      perfil = { nome, consent: $("#pOk", el).checked, selos: 0 };
+      desenhar(); atualizarCard(); if (comandaEl) renderComanda();
+      toast("Cadastro feito! (demonstração)");
+    });
+  }
+
+  $("#menu").addEventListener("click", (e) => {
+    if (e.target.closest("[data-perfil]")) return abrirPerfil();
+    const b = e.target.closest("[data-abrir]"); if (b) abrirProduto(b.dataset.abrir);
+  });
 
   /* ===== detalhe do produto ===== */
   function abrirProduto(id) {
@@ -189,6 +245,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><div class="qtd"><button type="button" data-q="${k}" data-d="-1" aria-label="Diminuir ${esc(i.nome)}">${ic.menos}</button><span>${i.qtd}</span><button type="button" data-q="${k}" data-d="1" aria-label="Aumentar ${esc(i.nome)}">${ic.mais}</button></div><button type="button" class="x" style="background:none" data-rm="${k}" aria-label="Remover ${esc(i.nome)}">${ic.lixo}</button></div></div>`).join("") : '<p class="muted" style="font-size:.9rem">Nada na comanda. Escolha itens no cardápio.</p>'}</div>
       <div class="bloco"><h3 class="disp">Já pedido nesta mesa</h3>${pedidos.length ? pedidos.map((p) => `<div class="linha-item"><span class="status s-${p.status}">${ROT[p.status]}</span><ul style="margin-top:8px;font-size:.88rem">${p.itens.map((i) => `<li style="display:flex;justify-content:space-between;gap:8px"><span>${i.qtd}x ${esc(i.nome)}${i.tam ? ` (${i.tam})` : ""}</span><span>${brl(i.unit * i.qtd)}</span></li>`).join("")}</ul></div>`).join("") : '<p class="muted" style="font-size:.9rem">Nenhum pedido enviado ainda.</p>'}</div>
       <p class="total"><span>Total da mesa</span><span>${brl(totalCart() + totalPedidos())}</span></p><p class="muted" style="font-size:.78rem">O pagamento é feito no caixa, ao final.</p>
+      <button type="button" class="perfil-linha" data-perfil>${perfil ? `Olá, <b>${esc(perfil.nome)}</b>. Ver meu cartão fidelidade (${perfil.selos} selos)` : "<b>Crie seu perfil</b> — 10% de desconto nesta visita ao se cadastrar"}</button>
       <p class="nota">Demonstração: o garçom e a cozinha são simulados e nada é enviado de verdade. No café, o pedido chega à equipe na hora.</p>`;
     c.scrollTop = pos;
     $("#env", comandaEl).hidden = cart.length === 0; $("#env", comandaEl).textContent = `Enviar pedido ao garçom · ${brl(totalCart())}`;
@@ -203,6 +260,7 @@
     document.body.appendChild(el); overlays.push(el); travar();
     el.addEventListener("click", (e) => {
       if (e.target === el || e.target.closest("[data-fechar]")) return fecharTopo();
+      if (e.target.closest("[data-perfil]")) return abrirPerfil();
       const q = e.target.closest("[data-q]");
       if (q) { const i = cart[+q.dataset.q]; i.qtd += +q.dataset.d; if (i.qtd <= 0) cart.splice(+q.dataset.q, 1); return renderComanda(); }
       const r = e.target.closest("[data-rm]"); if (r) { cart.splice(+r.dataset.rm, 1); return renderComanda(); }
