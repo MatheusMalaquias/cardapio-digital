@@ -35,7 +35,7 @@ Passo a passo para colocar o projeto no ar. **Os logins de teste (`Teste@1234`) 
 3. Faça o deploy, volte ao Supabase e atualize o *Site URL* com o domínio real.
 
 ## 4. Acessos
-- **Cliente:** a página inicial do site mostra só a escolha da mesa. Com a tag/QR, o link da mesa abre direto: `/<slug>/mesa/<código>`.
+- **Cliente:** a mesa é definida pelo link da tag/QR, que abre direto em `/<slug>/mesa/<código>`. A página inicial do site só pede para aproximar o celular da tag. Se o dono ligar *Configurações > Permitir que o cliente escolha a mesa*, a página inicial passa a mostrar o seletor de mesas.
 - **Equipe (dono, gerente, garçom, cozinha e caixa):** `/gestao`. Não há link para ele na página do cliente.
 - **Esqueci a senha:** `/gestao/esqueci` envia um link por e-mail. Troca de senha logado: ícone de chave no topo do painel (`/redefinir-senha`).
 

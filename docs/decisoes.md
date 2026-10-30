@@ -100,7 +100,7 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Decisão.** `GET /api/health` devolve apenas booleanos (cada variável chegou? o banco responde?) e os **nomes** de variáveis parecidas, nunca valores.
 **Consequência.** Diagnóstico de configuração em segundos e uma checagem pronta para monitoramento. O endpoint é público, mas não expõe nenhum segredo.
 
-## D20 · Página inicial só com a escolha da mesa
+## D20 · Página inicial só com a escolha da mesa (substituída pela D23: a escolha agora é opcional e vem desligada)
 **Contexto.** O cliente que abre o endereço do café, sem passar pela tag/QR, não tinha o que fazer. Os links de mesa têm códigos aleatórios (D17).
 **Decisão.** A raiz do site leva à escolha da mesa do café (`/<slug>`): o cliente toca no número em que está. A função `listar_mesas` devolve número e código das mesas ativas. Com mais de um café no sistema, a raiz não lista nenhum.
 **Consequência.** Usabilidade melhor, com um custo de segurança assumido: o código da mesa deixa de ser segredo, e qualquer pessoa pode escolher qualquer mesa. As barreiras que restam são o limite por sessão (D3) e a confirmação do garçom antes de o pedido ir à cozinha. Tag e QR continuam abrindo direto na mesa certa.
@@ -114,3 +114,8 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Contexto.** O dono esqueceu a senha e o app não tinha recuperação. Redefinir por baixo, direto no banco, troca a credencial de uma conta sem passar pelo dono.
 **Decisão.** Fluxo padrão: `/gestao/esqueci` pede o e-mail (resposta sempre igual, para não revelar quais e-mails existem), o link do e-mail passa por `/auth/callback` (troca o código por uma sessão, destinos permitidos fixos) e leva a `/redefinir-senha`. A mesma tela serve para trocar a senha logado. Senha mínima de 8 caracteres, validada no servidor.
 **Consequência.** Ninguém precisa de acesso ao banco para recuperar uma conta. **Dependência:** o Supabase precisa ter o endereço do site em *Redirect URLs*; o e-mail padrão do Supabase envia poucos e-mails por hora (configurar SMTP próprio em produção).
+
+## D23 · A mesa é definida pelo link da tag; escolher mesa vira opção do dono
+**Contexto.** A D20 deixava qualquer pessoa ver e escolher qualquer mesa, o que contradiz a ideia central do produto: o link da tag/QR define a mesa, e o cliente não deve mexer nas coisas de outra mesa.
+**Decisão.** Nova configuração `permitir_escolher_mesa`, **desligada por padrão**. Desligada, `listar_mesas` não devolve nenhuma mesa (nem os códigos dos links) e a página do café só pede para aproximar o celular da tag ou ler o QR. Ligada pelo dono em *Configurações*, mostra o seletor de mesas (útil para cafés sem tags).
+**Consequência.** Os códigos aleatórios (D17) voltam a ser a barreira real entre mesas. Quem quiser a conveniência do seletor assume conscientemente o risco, descrito na própria opção.
