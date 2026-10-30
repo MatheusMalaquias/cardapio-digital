@@ -73,8 +73,8 @@ npm run dev                  # http://localhost:3000
 
 Recriar o banco do zero: `npx supabase db reset`.
 
-- Cardápio: http://localhost:3000/cafe-exemplo/mesa/mesa1 (mesa1 … mesa10)
-- Equipe: http://localhost:3000/login · Studio: http://127.0.0.1:54323
+- Cliente: http://localhost:3000 (escolhe a mesa) ou direto em http://localhost:3000/cafe-exemplo/mesa/mesa1 (mesa1 … mesa10)
+- Equipe (dono, gerente, garçom, cozinha, caixa): http://localhost:3000/gestao · Studio: http://127.0.0.1:54323
 
 ### Usuários de teste (senha de todos: `Teste@1234`)
 | Papel | E-mail | Acessa |

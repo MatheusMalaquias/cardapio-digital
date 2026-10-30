@@ -18,9 +18,10 @@ Passo a passo para colocar o projeto no ar. **Os logins de teste (`Teste@1234`) 
    ```
 4. Em **Authentication**:
    - *Sign In / Providers*: deixe só E-mail e **desative "Allow new users to sign up"**. A equipe é criada pelo dono.
-   - *URL Configuration*: *Site URL* com o endereço final do app (Vercel) e o mesmo em *Redirect URLs*.
+   - *URL Configuration*: *Site URL* com o endereço final do app (Vercel) e, em *Redirect URLs*, `https://<seu-site>.vercel.app/**`. Sem isso o e-mail de "esqueci minha senha" não leva ao app.
 5. Crie o dono em **Authentication > Users > Add user** (e-mail + senha forte, *Auto Confirm*).
 6. Rode `supabase/producao/bootstrap.sql` no **SQL Editor** (preenchendo e-mail, slug e nome). Isso cria o estabelecimento, o vínculo do dono e as mesas com códigos imprevisíveis.
+6b. (Opcional, para testar) rode `supabase/producao/demo-cardapio.sql` no SQL Editor, trocando o `v_slug`: cria 4 categorias, 15 produtos com ingredientes, opções, tamanhos e uma promoção. Não cria usuários nem pedidos.
 7. Confira em **Storage** que o bucket `produtos` existe e, em **Database > Replication**, que `pedidos`, `chamados`, `comandas` e `produtos` estão no Realtime (as migrations já configuram).
 
 ## 3. Vercel
@@ -33,7 +34,12 @@ Passo a passo para colocar o projeto no ar. **Os logins de teste (`Teste@1234`) 
    | `SUPABASE_SERVICE_ROLE_KEY` | chave service_role/secret (somente servidor) |
 3. Faça o deploy, volte ao Supabase e atualize o *Site URL* com o domínio real.
 
-## 4. Verificação
+## 4. Acessos
+- **Cliente:** a página inicial do site mostra só a escolha da mesa. Com a tag/QR, o link da mesa abre direto: `/<slug>/mesa/<código>`.
+- **Equipe (dono, gerente, garçom, cozinha e caixa):** `/gestao`. Não há link para ele na página do cliente.
+- **Esqueci a senha:** `/gestao/esqueci` envia um link por e-mail. Troca de senha logado: ícone de chave no topo do painel (`/redefinir-senha`).
+
+## 5. Verificação
 - Abrir `/<slug>/mesa/<codigo>` (o código aparece em Admin > Mesas e QR) e fazer um pedido.
-- Entrar em `/login` como dono, confirmar o pedido como garçom/dono, fechar no caixa e ver as métricas.
+- Entrar em `/gestao` como dono, confirmar o pedido como garçom/dono, fechar no caixa e ver as métricas.
 - Rodar `scripts/metricas-reais.sql` para registrar números reais em `docs/numeros.md`.

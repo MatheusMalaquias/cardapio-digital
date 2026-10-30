@@ -99,3 +99,18 @@ Escrito ao longo do desenvolvimento, uma entrada por decisão importante (mais r
 **Contexto.** No primeiro deploy na Vercel, as páginas deram erro 500 porque as variáveis do Supabase não estavam no build. Pelo lado de fora, a causa não era visível.
 **Decisão.** `GET /api/health` devolve apenas booleanos (cada variável chegou? o banco responde?) e os **nomes** de variáveis parecidas, nunca valores.
 **Consequência.** Diagnóstico de configuração em segundos e uma checagem pronta para monitoramento. O endpoint é público, mas não expõe nenhum segredo.
+
+## D20 · Página inicial só com a escolha da mesa
+**Contexto.** O cliente que abre o endereço do café, sem passar pela tag/QR, não tinha o que fazer. Os links de mesa têm códigos aleatórios (D17).
+**Decisão.** A raiz do site leva à escolha da mesa do café (`/<slug>`): o cliente toca no número em que está. A função `listar_mesas` devolve número e código das mesas ativas. Com mais de um café no sistema, a raiz não lista nenhum.
+**Consequência.** Usabilidade melhor, com um custo de segurança assumido: o código da mesa deixa de ser segredo, e qualquer pessoa pode escolher qualquer mesa. As barreiras que restam são o limite por sessão (D3) e a confirmação do garçom antes de o pedido ir à cozinha. Tag e QR continuam abrindo direto na mesa certa.
+
+## D21 · Login da equipe em um endereço próprio (`/gestao`)
+**Contexto.** A página pública não deve oferecer login; dono, gerente e equipe entram por outro caminho.
+**Decisão.** Um único login para toda a equipe em `/gestao`, sem link na página do cliente. `/login` redireciona para lá. Os papéis continuam separando o que cada um vê. Nomes reservados (`gestao`, `painel`, `api`…) não podem ser slug de café.
+**Consequência.** Endereço pouco óbvio ajuda, mas não é segurança: a proteção real é autenticação + RLS + papel por rota. **Pendência:** limitar tentativas de login e, se necessário, separar a entrada do dono/gerente da dos demais.
+
+## D22 · Recuperação e troca de senha dentro do app
+**Contexto.** O dono esqueceu a senha e o app não tinha recuperação. Redefinir por baixo, direto no banco, troca a credencial de uma conta sem passar pelo dono.
+**Decisão.** Fluxo padrão: `/gestao/esqueci` pede o e-mail (resposta sempre igual, para não revelar quais e-mails existem), o link do e-mail passa por `/auth/callback` (troca o código por uma sessão, destinos permitidos fixos) e leva a `/redefinir-senha`. A mesma tela serve para trocar a senha logado. Senha mínima de 8 caracteres, validada no servidor.
+**Consequência.** Ninguém precisa de acesso ao banco para recuperar uma conta. **Dependência:** o Supabase precisa ter o endereço do site em *Redirect URLs*; o e-mail padrão do Supabase envia poucos e-mails por hora (configurar SMTP próprio em produção).
